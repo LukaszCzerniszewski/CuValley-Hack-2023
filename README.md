@@ -54,8 +54,9 @@
       </tr>
     </tbody>
   </table>
-</ul>
-<h4>Diagram przypadków użycia</h4>
-<ul>
-  <img src="https://user-images.githubusercontent.com/68614570/214142786-a0daeefe-6b99-45c4-a08a-9037775f988f.jpg" width="500" height="333" alt="214142786-a0daeefe-6b99-45c4-a08a-9037775f988f">
+
+  <h4>Diagram przypadków użycia</h4>
+  <ul>
+    <img src="https://user-images.githubusercontent.com/68614570/214142786-a0daeefe-6b99-45c4-a08a-9037775f988f.jpg" width="500" height="333" alt="214142786-a0daeefe-6b99-45c4-a08a-9037775f988f">
+  </ul>
 </ul>
