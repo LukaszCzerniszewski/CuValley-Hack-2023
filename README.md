@@ -1,4 +1,11 @@
 <h1>System automatycznej estymacji poziomu wody w rzece</h1>
+<h3>Opis</h3>
+<ul>
+  <h5>Cel</h5>
+  Stworzenie modelu/algorytmu, który na bazie danych historycznych oraz prognozy pogody, pochodzących z IMGW, pozwoli prognozować poziom wody rzeki. 
+  <h5Realizacja</h5>
+  Ideą przyświiecającą zespołowi ObjectNotFound było wykorzystanie sieci neuronowych do przewidywania poziomu wody w rzece. Dane postanowiliśmy zapisywac w bazie danych Oracle, która jest bardzo wydajna. Wykorzystana architektura oraz wykonanie interfejsu graficznego w formie aplikacji internetowej sprawia, że system jest dostępny dla wszystkich osób w obrębie sieci oraz będzie działać na każdym urządzenie niezależnie od systemu operacyjnego czy typu. 
+</ul>  
 <h3>Wymagania funkcjonalne</h3>
 <ul>
   System będzie automatycznie prognozować poziom wody w rzece na podstawie danych historycznych oraz prognozy pogody pochodzącej z IMGW.
