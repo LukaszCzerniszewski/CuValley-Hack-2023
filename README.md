@@ -39,4 +39,7 @@
    </tbody>
 </table>
 
+<h4> Diagram przypadków użycia </h4>
+https://user-images.githubusercontent.com/68614570/214142786-a0daeefe-6b99-45c4-a08a-9037775f988f.jpg
+
   
