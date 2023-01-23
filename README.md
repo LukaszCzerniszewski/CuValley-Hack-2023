@@ -40,7 +40,7 @@
 </table>
 
 <h4> Diagram przypadków użycia </h4>
-  <img src="[pic_trulli.jpg](https://user-images.githubusercontent.com/68614570/214142786-a0daeefe-6b99-45c4-a08a-9037775f988f.jpg)" alt="Trulli" width="500" height="333">
+  <img src="https://user-images.githubusercontent.com/68614570/214142786-a0daeefe-6b99-45c4-a08a-9037775f988f.jpg" alt="Trulli" width="500" height="333">
 
 
   
