@@ -125,14 +125,6 @@ function Header({ children }) {
                     </Icon>
                   }
                 />
-                <Tab
-                  label="Settings"
-                  icon={
-                    <Icon fontSize="small" sx={{ mt: -0.25 }}>
-                      settings
-                    </Icon>
-                  }
-                />
               </Tabs>
             </AppBar>
           </Grid>
