@@ -42,6 +42,25 @@ def loadDataFromPageCsv():
 
     return df.to_json(orient='records')
 
-# print(loadMetoAsJson ())
-# print(loadHydroAsJson())
-#print(loadDataFromPageCsv())
+#Funckcja przyjmuje na wejsciu jsona i liste kodw_stacji
+# Zwaracana jest lista z elementami tylko z numerami kod_stacji znajdujcymi sie na liscie
+def extractFromJson(json, list):
+
+    df = pandas.read_json(json, orient='records')
+    df["kod_stacji"] = df["kod_stacji"].astype(str)
+    list = [str(x) for x in list]
+
+
+    df = df[df["kod_stacji"].isin(list)]
+    df.to_json('data.json', orient='records')
+    print(df)
+
+
+    return df
+
+
+print(loadMetoAsJson ())
+print(loadHydroAsJson())
+print(extractFromJson(loadDataFromPageCsv(),[250160410, '251170270', '250160610',
+               '250160030','250160070','250170050','251160230',
+               '251160170']))
