@@ -43,10 +43,10 @@ if (activity !== null) {
   var activityData = [
     {
       first: [0, 65, 52, 115, 98, 165, 125],
-      second: [600],
-      third: [1,2,3,4,5,6,7],
-      fourth: [8,9,10,11,12],
-      fifth: [13,14]
+      second: [600,600,600,600,600,600,600],
+      third: [400,400,400,400,400,400,400],
+      fourth: [333,333,333,333,333,333],
+      fifth: [147,147,147,147,147,147]
     }
   ];
 
@@ -81,30 +81,27 @@ if (activity !== null) {
         {
           label: "Alarm state",
           backgroundColor: "transparent",
-          borderColor: "rgb(255, 199, 15)",
+          borderColor: "rgb(255, 0, 0)",
           data: activityData[0].second,
           lineTension: 0,
-          borderDash: [10, 5],
-          borderWidth: 1,
-          pointRadius: 5,
-          pointBackgroundColor: "rgba(255,255,255,1)",
-          pointHoverBackgroundColor: "rgba(255,255,255,1)",
+          borderWidth: 10,
+          pointRadius: 0,
+          pointBorderWidth: 10,
+          pointHoverRadius: 0,
+          pointHoverBorderWidth: 10
          
         },
         {
             label: "Warning state",
             backgroundColor: "transparent",
-            borderColor: "rgb(255, 199, 15)",
+            borderColor: "rgb(255, 128, 0)",
             data: activityData[0].third,
             lineTension: 0,
-            borderDash: [10, 5],
-            borderWidth: 1,
-            pointRadius: 5,
-            pointBackgroundColor: "rgba(255,255,255,1)",
-            pointHoverBackgroundColor: "rgba(255,255,255,1)",
-            pointBorderWidth: 2,
-            pointHoverRadius: 7,
-            pointHoverBorderWidth: 1
+            borderWidth: 0,
+            pointRadius: 0,
+            pointBorderWidth: 10,
+            pointHoverRadius: 0,
+            pointHoverBorderWidth: 10
           },
           {
             label: "Low state",
