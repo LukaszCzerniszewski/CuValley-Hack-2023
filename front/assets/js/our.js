@@ -44,9 +44,9 @@ if (activity !== null) {
     {
       first: [0, 65, 52, 115, 98, 165, 125],
       second: [600,600,600,600,600,600,600],
-      third: [400,400,400,400,400,400,400],
-      fourth: [333,333,333,333,333,333],
-      fifth: [147,147,147,147,147,147]
+      third: [400,400,400,400,400,400,400,400],
+      fourth: [333,333,333,333,333,333,333],
+      fifth: [147,147,147,147,147,147,147]
     }
   ];
 
@@ -68,7 +68,7 @@ if (activity !== null) {
         {
           label: "Trend",
           backgroundColor: "transparent",
-          borderColor: "rgb(82, 136, 255)",
+          borderColor: "rgb(0,204,0)",
           data: activityData[0].first,
           lineTension: 0,
           pointRadius: 5,
@@ -84,11 +84,11 @@ if (activity !== null) {
           borderColor: "rgb(255, 0, 0)",
           data: activityData[0].second,
           lineTension: 0,
-          borderWidth: 10,
+          borderWidth: 5,
           pointRadius: 0,
-          pointBorderWidth: 10,
+          pointBorderWidth: 5,
           pointHoverRadius: 0,
-          pointHoverBorderWidth: 10
+          pointHoverBorderWidth: 5
          
         },
         {
@@ -97,41 +97,35 @@ if (activity !== null) {
             borderColor: "rgb(255, 128, 0)",
             data: activityData[0].third,
             lineTension: 0,
-            borderWidth: 0,
-            pointRadius: 0,
-            pointBorderWidth: 10,
-            pointHoverRadius: 0,
-            pointHoverBorderWidth: 10
+          borderWidth: 5,
+          pointRadius: 0,
+          pointBorderWidth: 5,
+          pointHoverRadius: 0,
+          pointHoverBorderWidth: 5
           },
           {
             label: "Low state",
             backgroundColor: "transparent",
-            borderColor: "rgb(255, 199, 15)",
+            borderColor: "rgb(51, 153, 255)",
             data: activityData[0].fourth,
             lineTension: 0,
-            borderDash: [10, 5],
-            borderWidth: 1,
-            pointRadius: 5,
-            pointBackgroundColor: "rgba(255,255,255,1)",
-            pointHoverBackgroundColor: "rgba(255,255,255,1)",
-            pointBorderWidth: 2,
-            pointHoverRadius: 7,
-            pointHoverBorderWidth: 1
+          borderWidth: 5,
+          pointRadius: 0,
+          pointBorderWidth: 5,
+          pointHoverRadius: 0,
+          pointHoverBorderWidth: 5
           },
           {
             label: "High state",
             backgroundColor: "transparent",
-            borderColor: "rgb(255, 199, 15)",
+            borderColor: "rgb(255, 255, 0)",
             data: activityData[0].fifth,
             lineTension: 0,
-            borderDash: [10, 5],
-            borderWidth: 1,
-            pointRadius: 5,
-            pointBackgroundColor: "rgba(255,255,255,1)",
-            pointHoverBackgroundColor: "rgba(255,255,255,1)",
-            pointBorderWidth: 2,
-            pointHoverRadius: 7,
-            pointHoverBorderWidth: 1
+            borderWidth: 5,
+            pointRadius: 0,
+            pointBorderWidth: 5,
+            pointHoverRadius: 0,
+            pointHoverBorderWidth: 5
           }
       ]
     },
