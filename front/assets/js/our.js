@@ -1,22 +1,52 @@
+if ($("#user-activity")) {
+    var start = moment().subtract(1, "days");
+    var end = moment().subtract(1, "days");
+    var cb = function(start, end) {
+      $("#user-activity .date-range-report span").html(
+        start.format("ll") + " - " + end.format("ll")
+      );
+    };
+
+  
+    $("#user-activity .date-range-report").daterangepicker(
+      {
+        startDate: start,
+        endDate: end,
+        opens: 'left',
+        ranges: {
+          Today: [moment(), moment()],
+          Yesterday: [
+            moment().subtract(1, "days"),
+            moment().subtract(1, "days")
+          ],
+          "Last 7 Days": [moment().subtract(6, "days"), moment()],
+          "Last 30 Days": [moment().subtract(29, "days"), moment()],
+          "This Month": [moment().startOf("month"), moment().endOf("month")],
+          "Last Month": [
+            moment()
+              .subtract(1, "month")
+              .startOf("month"),
+            moment()
+              .subtract(1, "month")
+              .endOf("month")
+          ]
+        }
+      },
+      cb
+    );
+    cb(start, end);
+  }
+
 /*======== 16. ANALYTICS - ACTIVITY CHART ========*/
 var activity = document.getElementById("activity");
 if (activity !== null) {
   var activityData = [
     {
       first: [0, 65, 52, 115, 98, 165, 125],
-      second: [45, 38, 100, 87, 152, 187, 85]
-    },
-    {
-      first: [0, 65, 77, 33, 49, 100, 100],
-      second: [88, 33, 20, 44, 111, 140, 77]
-    },
-    {
-      first: [0, 40, 77, 55, 33, 116, 50],
-      second: [55, 32, 20, 55, 111, 134, 66]
-    },
-    {
-      first: [0, 44, 22, 77, 33, 151, 99],
-      second: [60, 32, 120, 55, 19, 134, 88]
+      second: [600],
+      third: [1,2,3,4,5,6,7],
+      fourth: [8,9,10,11,12],
+      fifth: [13,14]
     }
   ];
 
@@ -26,7 +56,7 @@ if (activity !== null) {
     // The data for our dataset
     data: {
       labels: [
-        "4 kokoszka",
+        "4 Jan",
         "5 Jan",
         "6 Jan",
         "7 Jan",
@@ -36,7 +66,7 @@ if (activity !== null) {
       ],
       datasets: [
         {
-          label: "Active",
+          label: "Trend",
           backgroundColor: "transparent",
           borderColor: "rgb(82, 136, 255)",
           data: activityData[0].first,
@@ -49,7 +79,7 @@ if (activity !== null) {
           pointHoverBorderWidth: 1
         },
         {
-          label: "Inactive",
+          label: "Alarm state",
           backgroundColor: "transparent",
           borderColor: "rgb(255, 199, 15)",
           data: activityData[0].second,
@@ -59,10 +89,53 @@ if (activity !== null) {
           pointRadius: 5,
           pointBackgroundColor: "rgba(255,255,255,1)",
           pointHoverBackgroundColor: "rgba(255,255,255,1)",
-          pointBorderWidth: 2,
-          pointHoverRadius: 7,
-          pointHoverBorderWidth: 1
-        }
+         
+        },
+        {
+            label: "Warning state",
+            backgroundColor: "transparent",
+            borderColor: "rgb(255, 199, 15)",
+            data: activityData[0].third,
+            lineTension: 0,
+            borderDash: [10, 5],
+            borderWidth: 1,
+            pointRadius: 5,
+            pointBackgroundColor: "rgba(255,255,255,1)",
+            pointHoverBackgroundColor: "rgba(255,255,255,1)",
+            pointBorderWidth: 2,
+            pointHoverRadius: 7,
+            pointHoverBorderWidth: 1
+          },
+          {
+            label: "Low state",
+            backgroundColor: "transparent",
+            borderColor: "rgb(255, 199, 15)",
+            data: activityData[0].fourth,
+            lineTension: 0,
+            borderDash: [10, 5],
+            borderWidth: 1,
+            pointRadius: 5,
+            pointBackgroundColor: "rgba(255,255,255,1)",
+            pointHoverBackgroundColor: "rgba(255,255,255,1)",
+            pointBorderWidth: 2,
+            pointHoverRadius: 7,
+            pointHoverBorderWidth: 1
+          },
+          {
+            label: "High state",
+            backgroundColor: "transparent",
+            borderColor: "rgb(255, 199, 15)",
+            data: activityData[0].fifth,
+            lineTension: 0,
+            borderDash: [10, 5],
+            borderWidth: 1,
+            pointRadius: 5,
+            pointBackgroundColor: "rgba(255,255,255,1)",
+            pointHoverBackgroundColor: "rgba(255,255,255,1)",
+            pointBorderWidth: 2,
+            pointHoverRadius: 7,
+            pointHoverBorderWidth: 1
+          }
       ]
     },
     // Configuration options go here
@@ -130,6 +203,9 @@ if (activity !== null) {
     item.addEventListener("click", function() {
       config.data.datasets[0].data = activityData[index].first;
       config.data.datasets[1].data = activityData[index].second;
+      config.data.datasets[2].data = activityData[index].third;
+      config.data.datasets[3].data = activityData[index].fourth;
+      config.data.datasets[4].data = activityData[index].fifth;
       myLine.update();
     });
   });
