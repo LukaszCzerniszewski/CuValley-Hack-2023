@@ -59,6 +59,7 @@ $(function() {
       );
     };
 
+  
     $("#user-activity .date-range-report").daterangepicker(
       {
         startDate: start,
