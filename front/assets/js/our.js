@@ -37,18 +37,22 @@ if ($("#water-state")) {
     cb(start, end);
   }
 
+
+
+
+
 /*======== 16. ANALYTICS - ACTIVITY CHART ========*/
 var activity = document.getElementById("activity");
 if (activity !== null) {
   var activityData = [
     {
-      first: [0, 65, 52, 115, 98, 165, 125],
+      first: result,
       second: [600,600,600,600,600,600,600],
       third: [400,400,400,400,400,400,400,400],
       fourth: [333,333,333,333,333,333,333],
       fifth: [147,147,147,147,147,147,147]
     }
-  ];
+  ]
   // document.addEventListener('calendarReady', function() {
   //   let startDate = calendar.getStartDate();
   //   let endDate = calendar.getEndDate();
@@ -59,15 +63,15 @@ if (activity !== null) {
   //   setLabelForDate(date, label);
   //   labels.push(label);
   // }
-  function callRainfall() {
-    $.ajax({
-      url:'/api/get-rainfall',
-      type: 'GET',
-      success: function(response) {
-        console.log(respone)
-      }
-    });
-  }
+  // function callRainfall() {
+  //   $.ajax({
+  //     url:'/api/get-rainfall',
+  //     type: 'GET',
+  //     success: function(response) {
+  //       console.log(respone)
+  //     }
+  //   });
+  // }
   var config = {
     // The type of chart we want to create
     type: "line",

@@ -1,121 +1,32 @@
-/* ====== Index ======
-
-1. BASIC MAP
-2. MAP WITH MARKER
-3. POLYGONAL MAP
-4. POLYLINE MAP
-5. MULTIPLE MARKER
-6. STYLED MAP
-
-====== End ======*/
-
 $(function() {
   "use strict";
 
-  /*======== 1. BASIC MAP ========*/
-  function basicMap() {
-    var denver = new google.maps.LatLng(39.5501, -105.7821);
-    var map = new google.maps.Map(document.getElementById("basicMap"), {
-      zoom: 8,
-      center: denver
-    });
-  }
-
-  /*======== 2. MAP WITH MARKER ========*/
-  function markerMap() {
-    var colorado = new google.maps.LatLng(38.82505, -104.821752);
-    var map = new google.maps.Map(document.getElementById("mapMarker"), {
-      zoom: 8,
-      center: colorado
-    });
-
-    var contentString =
-      '<div id="content">' +
-      '<h4 id="infoTitle" class="info-title">Colorado</h4>' +
-      "</div>";
-
-    var infowindow = new google.maps.InfoWindow({
-      content: contentString
-    });
-    var marker = new google.maps.Marker({
-      position: colorado,
-      map: map
-    });
-    infowindow.open(map, marker);
-    marker.addListener("click", function() {
-      infowindow.open(map, marker);
-    });
-  }
-
-  /*======== 3. POLYGONAL MAP ========*/
-  function polyMap() {
-    var center = new google.maps.LatLng(37.347442, -91.242551);
-    var map = new google.maps.Map(document.getElementById("polygonalMap"), {
-      zoom: 5,
-      center: center,
-      mapTypeId: "terrain"
-    });
-
-    // Define the LatLng coordinates for the polygon's path.
-    var ractangleCoords = [
-      { lat: 39.086254, lng: -94.567509 },
-      { lat: 35.293261, lng: -97.210534 },
-      { lat: 36.058717, lng: -86.863566 },
-      { lat: 38.498833, lng: -90.133947 },
-      { lat: 39.086254, lng: -94.567509 }
-    ];
-
-    // Construct the polygon.
-    var kansasRact = new google.maps.Polygon({
-      paths: ractangleCoords,
-      strokeColor: "#4c84ff",
-      strokeOpacity: 0.8,
-      strokeWeight: 2,
-      fillColor: "#4c84ff",
-      fillOpacity: 0.35
-    });
-    kansasRact.setMap(map);
-  }
-
-  /*======== 4. POLYLINE MAP ========*/
-  function polylineMap() {
-    var center = new google.maps.LatLng(39.399273, -86.151248);
-    var map = new google.maps.Map(document.getElementById("polylineMap"), {
-      zoom: 5,
-      center: center,
-      mapTypeId: "terrain"
-    });
-
-    var flightPlanCoordinates = [
-      { lat: 39.08199, lng: -94.568882 },
-      { lat: 38.538338, lng: -90.220769 },
-      { lat: 39.399273, lng: -86.151248 },
-      { lat: 38.830073, lng: -77.098642 }
-    ];
-    var flightPath = new google.maps.Polyline({
-      path: flightPlanCoordinates,
-      geodesic: true,
-      strokeColor: "#4c84ff",
-      strokeOpacity: 1.0,
-      strokeWeight: 3
-    });
-
-    flightPath.setMap(map);
-  }
-
-  /*======== 5. MULTIPLE MARKER ========*/
   function multiMarkerMap() {
-    var locations = [
-      ["Bondi Beach", -33.890542, 151.274856, 4],
-      ["Coogee Beach", -33.923036, 151.259052, 5],
-      ["Cronulla Beach", -34.028249, 151.157507, 3],
-      ["Manly Beach", -33.80010128657071, 151.28747820854187, 2],
-      ["Maroubra Beach", -33.950198, 151.259302, 1]
-    ];
+    var locations = [];
+    const xhttp = new XMLHttpRequest();
+    xhttp.onload = function() {
+      const obj = JSON.parse(this.responseText);
+      for (var i = 0; i < obj.length; i++){
+        locations.push([obj[i][3], obj[i][2], obj[i][1], i+1]);
+      }
+      console.log(locations);
+    }
+    
+    xhttp.open("POST", "/api/get_stations_info", false);
+    xhttp.setRequestHeader("kkey_y", "c9f53a7a0657ed8769098ad48074709cbd0bf0ad83e41e67164a9316605b86b0bdd81f0b16fd8b1a4a3dc7c0194f9bcb50cc29c16bfd73ef42c07e81b35026ef");
+    xhttp.send("");
 
-    var center = new google.maps.LatLng(-33.92, 151.25);
+    // var locations = [
+    //   ["Bondi Beach", -33.890542, 151.274856, 4],
+    //   ["Coogee Beach", -33.923036, 151.259052, 5],
+    //   ["Cronulla Beach", -34.028249, 151.157507, 3],
+    //   ["Manly Beach", -33.80010128657071, 151.28747820854187, 2],
+    //   ["Maroubra Beach", -33.950198, 151.259302, 1]
+    // ];
+
+    var center = new google.maps.LatLng(51.9194, 19.1451);
     var map = new google.maps.Map(document.getElementById("multiMarkerMap"), {
-      zoom: 10,
+      zoom: 5.5,
       center: center,
       mapTypeId: google.maps.MapTypeId.ROADMAP
     });
@@ -143,62 +54,7 @@ $(function() {
     }
   }
 
-  /*======== 6. STYLED MAP ========*/
-  function styleMap() {
-    var style = [
-      {
-        stylers: [
-          {
-            hue: "#2c3e50"
-          },
-          {
-            saturation: 250
-          }
-        ]
-      },
-      {
-        featureType: "road",
-        elementType: "geometry",
-        stylers: [
-          {
-            lightness: 50
-          },
-          {
-            visibility: "simplified"
-          }
-        ]
-      },
-      {
-        featureType: "road",
-        elementType: "labels",
-        stylers: [
-          {
-            visibility: "off"
-          }
-        ]
-      }
-    ];
-
-    var dakota = new google.maps.LatLng(44.3341, -100.305);
-    var map = new google.maps.Map(document.getElementById("styleMap"), {
-      zoom: 7,
-      center: dakota,
-      mapTypeId: "roadmap",
-      styles: style
-    });
-  }
-
   if (document.getElementById("google-map")) {
-    google.maps.event.addDomListener(window, "load", basicMap);
-
-    google.maps.event.addDomListener(window, "load", markerMap);
-
-    google.maps.event.addDomListener(window, "load", polyMap);
-
-    google.maps.event.addDomListener(window, "load", polylineMap);
-
     google.maps.event.addDomListener(window, "load", multiMarkerMap);
-
-    google.maps.event.addDomListener(window, "load", styleMap);
   }
 });

@@ -23,16 +23,37 @@ def send_report(path):
 def hello_world():
     return send_from_directory('front', 'index.html')
 
-@app.route('/api')
-def api_test_call():
+# @app.route('/api')
+# def api_test_call():
+#     if not request.headers.has_key('kkey_y') or request.headers['kkey_y'] != api_key:
+#         abort(404)
+#     cur.execute("SELECT * FROM METEO_STATION")
+#     res = cur.fetchall()
+#     a = []
+#     for row in res:
+#         r = list(row)
+#         r[2] = datetime.timestamp(row[2])
+#         a.append(r)
+
+#     response = make_response(
+#                 jsonify(
+#                     a
+#                 ),
+#                 200,
+#             )
+#     response.headers["Content-Type"] = "application/json"
+#     return response
+
+@app.route('/api/get_stations_info', methods=['POST'])
+def get_stations_info():
     if not request.headers.has_key('kkey_y') or request.headers['kkey_y'] != api_key:
         abort(404)
-    cur.execute("SELECT * FROM METEO_STATION")
+    query = f"select distinct station_id, lo, la, stations_geo.station_name from station inner join stations_geo on stations_geo.station_id = station.stationcode"
+    cur.execute(query)
     res = cur.fetchall()
     a = []
     for row in res:
         r = list(row)
-        r[2] = datetime.timestamp(row[2])
         a.append(r)
 
     response = make_response(
@@ -43,7 +64,7 @@ def api_test_call():
             )
     response.headers["Content-Type"] = "application/json"
     return response
-    
+
 @app.route('/api/get_rainfall', methods=['POST'])
 def get_rainfall():
     if not request.headers.has_key('kkey_y') or request.headers['kkey_y'] != api_key:
@@ -51,6 +72,8 @@ def get_rainfall():
     data = request.get_json()
     station_code = data['STATIONCODE']
     date = data['DDATE']
+    station_code = data['250160030']
+    date = data['12/01/11']
     query = f"SELECT DAILYRAINFALLTOTAL FROM METEO_STATION WHERE STATIONCODE = '{station_code}' AND DDATE = '{date}'"
     cur.execute(query)
     result = cur.fetchone()
@@ -62,7 +85,7 @@ def get_rainfall():
         return jsonify("No data found for the provided station code and date"), 404
 
 @app.route('/api/get_waterstate', methods=['POST'])
-def get_rainfall():
+def get_waterstate():
     if not request.headers.has_key('kkey_y') or request.headers['kkey_y'] != api_key:
         abort(404)
     data = request.get_json()
