@@ -9,7 +9,7 @@ $(function() {
       for (var i = 0; i < obj.length; i++){
         locations.push([obj[i][3], obj[i][2], obj[i][1], i+1]);
       }
-      console.log(locations);
+      // console.log(locations);
     }
     
     xhttp.open("POST", "/api/get_stations_info", false);

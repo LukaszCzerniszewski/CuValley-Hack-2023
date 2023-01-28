@@ -45,7 +45,7 @@
                 <path class="logo-fill-white" fill="#FFF" d="M11 4v25l8 4V0z" />
               </g>
             </svg>
-            <span class="brand-name text-truncate">Łer jes woda?</span>
+            <span class="brand-name text-truncate">Where is water?</span>
           </a>
         </div>
         <!-- begin sidebar scrollbar -->
@@ -62,7 +62,7 @@
                 <div class="sub-menu">
                   <li class="active">
                     <a class="sidenav-item-link" href="/">
-                      <span class="nav-text">Włoda</span>
+                      <span class="nav-text">River state</span>
                     </a>
                   </li>
                 </div>
@@ -85,7 +85,7 @@
           </button>
           <!-- search form -->
           <div class="search-form d-none d-lg-inline-block">
-            <div class="input-group">
+            <!-- <div class="input-group">
               <button type="button" name="search" id="search-btn" class="btn btn-flat">
                 <i class="mdi mdi-magnify"></i>
               </button>
@@ -94,8 +94,8 @@
             </div>
             <div id="search-results-container">
               <ul id="search-results"></ul>
-            </div>
-          </div>
+            </div> -->
+          </div> 
           <div class="navbar-right ">
             <ul class="nav navbar-nav">
               <li class="dropdown notifications-menu">
@@ -103,44 +103,11 @@
                   <i class="mdi mdi-bell-outline"></i>
                 </button>
                 <ul class="dropdown-menu dropdown-menu-right">
-                  <li class="dropdown-header">You have 5 notifications</li>
+                  <li class="dropdown-header">You have 1 notifications</li>
                   <li>
                     <a href="#">
-                      <i class="mdi mdi-account-plus"></i> New user registered
-                      <span class=" font-size-12 d-inline-block float-right"><i class="mdi mdi-clock-outline"></i> 10
-                        AM</span>
+                      <i class="mdi mdi-account-plus"></i> Alarm!
                     </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <i class="mdi mdi-account-remove"></i> User deleted
-                      <span class=" font-size-12 d-inline-block float-right"><i class="mdi mdi-clock-outline"></i> 07
-                        AM</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <i class="mdi mdi-chart-areaspline"></i> Sales report is ready
-                      <span class=" font-size-12 d-inline-block float-right"><i class="mdi mdi-clock-outline"></i> 12
-                        PM</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <i class="mdi mdi-account-supervisor"></i> New client
-                      <span class=" font-size-12 d-inline-block float-right"><i class="mdi mdi-clock-outline"></i> 10
-                        AM</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <i class="mdi mdi-server-network-off"></i> Server overloaded
-                      <span class=" font-size-12 d-inline-block float-right"><i class="mdi mdi-clock-outline"></i> 05
-                        AM</span>
-                    </a>
-                  </li>
-                  <li class="dropdown-footer">
-                    <a class="text-center" href="#"> View All </a>
                   </li>
                 </ul>
               </li>
@@ -157,7 +124,7 @@
                 <div class="row">
                   <div class="col-md-12">
                     <div class="border-right">
-                      <div class="card-header justify-content-between py-5">
+                      <div class="card-header justify-content-between py-5" id="water-state">
                         <h2>Water change</h2>
                         <div class="station">
                           <span class="type-name">Station</span>
@@ -167,43 +134,18 @@
                                   <option value="150180060" class="d-inline-block mr-2 mb-3">RACIBÓRZ-MIEDONIA</option>
                                 </select>
                             </span>
-                            <span class="text-success ">5%
-                              <i class="mdi mdi-arrow-up-bold"></i>
-                            </span>
                         </div>
-                        <div class="date-range-report ">
+                        <div class="date-range-report">
                           <span></span>
                         </div>
                       </div>
                       <hr>
-                      <!-- <ul
-                        class="nav nav-tabs nav-style-border justify-content-between justify-content-xl-start border-bottom"
-                        role="tablist">
-                        <li class="nav-item">
-                          <a class="nav-link active pb-md-0" data-toggle="tab" href="#user" role="tab" aria-controls=""
-                            aria-selected="true">
-                            <span class="type-name"></span>
-                            <h4 class="d-inline-block mr-2 mb-3">5248</h4>
-                            
-                          </a> 
-                          
-                        </li>
-                       <li class="nav-item">
-                          <a class="nav-link active pb-md-0" data-toggle="tab" href="#user" role="tab" aria-controls=""
-                            aria-selected="true">
-                            
-                          </a>
-                        </li>
-                      </ul> -->
                       <div class="card-body">
                         <div class="tab-content" id="myTabContent">
                           <div class="tab-pane fade show active" id="user" role="tabpanel" aria-labelledby="home-tab">
                             <canvas id="activity" class="chartjs"></canvas>
                           </div>
                         </div>
-                      </div>
-                      <div class="card-footer d-flex flex-wrap bg-white border-top">
-                        <a href="#" class="text-uppercase py-3">Water state change</a>
                       </div>
                     </div>
                   </div>
@@ -294,8 +236,7 @@
               </div>
 
             </div>
-          </div>
-        </div>
+          
         <div class="right-sidebar-2">
           <div class="right-sidebar-container-2">
             <div class="slim-scroll-right-sidebar-2">
@@ -308,8 +249,7 @@
               </div>
             </div>
           </div>
-        </div>
-      </div>
+        
       <footer class="footer mt-auto">
         <div class="copyright bg-white">
           <p>
@@ -328,7 +268,7 @@
   <script src="assets/plugins/jvectormap/jquery-jvectormap-world-mill.js"></script>
   <script src="assets/plugins/daterangepicker/moment.min.js"></script>
   <script src="assets/plugins/daterangepicker/daterangepicker.js"></script>
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDCn8TFXGg17HAUcNpkwtxxyT9Io9B_NcM" defer></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDrnzJvDM1J_v1Wh7pzHQqE1pEIHDehMWM" defer></script>
   <script src="assets/js/sleek.bundle.js"></script>
   <script src="assets/js/our.js"></script>
   <script src="assets/js/map.js"></script>
