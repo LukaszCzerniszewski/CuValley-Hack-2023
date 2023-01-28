@@ -2,6 +2,10 @@ import pathlib
 import getpass
 import oracledb
 import pandas
+import time
+from datetime import datetime
+#pip install openpyxl
+import re
 
 class FileWork():
     hydroTestFile = 'hydro - sample.xlsx'
@@ -77,29 +81,64 @@ class DataBaseWork():
         self.dbConnect()
 
     def dbConnect(self):
+        path = pathlib.Path('C:\\Program Files\\Oracle\\instantclient_21_8\\network\\admin')
         connection = oracledb.connect(
             user=self.userName,
             password=self.password,
             dsn="objectnotfound_high",
-            config_dir="/opt/oracle/config")
+            config_dir=path)
         print("Successfully connected to Oracle Database", flush=True)
         self.cursor = connection.cursor()
+
+    def pushHydroToBase(self, json):
+        json = pandas.read_json(json, orient='records')
+        for index, row in json.iterrows():
+            x = datetime.strptime(str(row.Data), '%d-%m-%Y')
+            date = x.strftime("%y/%m/%d")
+
+            query1 = "INSERT INTO station ( DDate, waterstate, stationcode ) VALUES ('" + str(date) + "'," + str(row[1]) + ",151160060);"
+            query2 = "INSERT INTO station ( DDate, waterstate, stationcode ) VALUES ('" + str(date) + "'," + str(row[2]) + ",150180060);"
+            self.cursor.execute(query1)
+            self.cursor.execute(query2)
+
+    def pushCsvMeteoFileToBase(self):
+        file1 = open('meteo_fixed.csv', 'r', encoding="utf-8")
+        lines = file1.readlines()
+
+        count = 0
+        l = lines[0].split(";")
+        ready = []
+        for ll in l:
+            ll = re.sub(r'^.*\(', '', ll)
+            ll = ll.replace(")", "")
+            ready.append(ll)
+
+        # pominiecie stacji i headerow
+        for line in lines[2:]:
+            l = line.split(";")
+            ddate = l[0]
+            # kazde 2 kolejne sa do poszczegolnej stacji
+            for i in range(1, len(l), 2):
+                a = l[i]
+                if a == '':
+                    a = str(0)
+                query = "INSERT INTO meteo_station (STATIONCODE, DDATE, DAILYRAINFALLTOTAL) VALUES (" + ready[
+                    i] + ",TO_DATE('" + ddate + "', 'dd/mm/yyyy')," + a + ")"
+                self.cursor.execute(query)
+
+
+
+
+
 
 
 
 
 fileWork = FileWork()
-#print(fileWork.loadMetoAsJson())
+db = DataBaseWork()
 #print(fileWork.loadHydroAsJson())
 #print(fileWork.extractFromJson(fileWork.loadDataFromPageCsv(),[250160410, '251170270', '250160610','250160030','250160070','250170050','251160230','251160170']))
-#db = DataBaseWork()
-connection = oracledb.connect(
-    user="admin",
-    password='7KZYc!TrQQR*8onxTx4Z',
-    dsn="objectnotfound_high",
-    config_dir="/opt/oracle/config")
 
-print("Successfully connected to Oracle Database")
 
-cursor = connection.cursor()
-print(cursor)
+
+
