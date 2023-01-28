@@ -50,8 +50,8 @@ def get_rainfall():
         abort(404)
     data = request.get_json()
     station_code = data['STATIONCODE']
-    date = data['DATE']
-    query = f"SELECT DAILYRAINFALLTOTAL FROM METEO_STATION WHERE STATIONCODE = '{station_code}' AND DATE = '{date}'"
+    date = data['DDATE']
+    query = f"SELECT DAILYRAINFALLTOTAL FROM METEO_STATION WHERE STATIONCODE = '{station_code}' AND DDATE = '{date}'"
     cur.execute(query)
     result = cur.fetchone()
     cur.close()
@@ -60,6 +60,24 @@ def get_rainfall():
         return jsonify(daily_rainfall_total)
     else:
         return jsonify("No data found for the provided station code and date"), 404
+
+@app.route('/api/get_waterstate', methods=['POST'])
+def get_rainfall():
+    if not request.headers.has_key('kkey_y') or request.headers['kkey_y'] != api_key:
+        abort(404)
+    data = request.get_json()
+    station_code = data['STATIONCODE']
+    date = data['DDATE']
+    query = f"SELECT DAILYRAINFALLTOTAL FROM METEO_STATION WHERE STATIONCODE = '{station_code}' AND DDATE = '{date}'"
+    cur.execute(query)
+    result = cur.fetchone()
+    cur.close()
+    if result:
+        daily_rainfall_total = result[0]
+        return jsonify(daily_rainfall_total)
+    else:
+        return jsonify("No data found for the provided station code and date"), 404
+
 
 
 if __name__ == "__main__":

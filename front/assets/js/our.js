@@ -49,22 +49,30 @@ if (activity !== null) {
       fifth: [147,147,147,147,147,147,147]
     }
   ];
-  document.addEventListener('calendarReady', function() {
-    let startDate = calendar.getStartDate();
-    let endDate = calendar.getEndDate();
-  });
-  let labels=[]
-  for (let date = startDate; date <= endDate; date.setDate(date.getDate() + 1)) {
-    let label = getLabelForDate(date);
-    setLabelForDate(date, label);
-    labels.push(label);
-  }
+  // document.addEventListener('calendarReady', function() {
+  //   let startDate = calendar.getStartDate();
+  //   let endDate = calendar.getEndDate();
+  // });
+  // let labels=[]
+  // for (let date = startDate; date <= endDate; date.setDate(date.getDate() + 1)) {
+  //   let label = getLabelForDate(date);
+  //   setLabelForDate(date, label);
+  //   labels.push(label);
+  // }
   var config = {
     // The type of chart we want to create
     type: "line",
     // The data for our dataset
     data: {
-      labels: labels,
+      labels: [
+        "4 Jan",
+               "5 Jan",
+                "6 Jan",
+                "7 Jan",
+                "8 Jan",
+                "9 Jan",
+                "10 Jan"
+      ],
       datasets: [
         {
           label: "Trend",
