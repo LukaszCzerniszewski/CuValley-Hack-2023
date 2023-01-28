@@ -72,12 +72,9 @@ def get_rainfall():
     data = request.get_json()
     station_code = data['STATIONCODE']
     date = data['DDATE']
-    station_code = data['250160030']
-    date = data['12/01/11']
     query = f"SELECT DAILYRAINFALLTOTAL FROM METEO_STATION WHERE STATIONCODE = '{station_code}' AND DDATE = '{date}'"
     cur.execute(query)
     result = cur.fetchone()
-    cur.close()
     if result:
         daily_rainfall_total = result[0]
         return jsonify(daily_rainfall_total)
@@ -91,17 +88,33 @@ def get_waterstate():
     data = request.get_json()
     station_code = data['STATIONCODE']
     date = data['DDATE']
-    query = f"SELECT WATERSTATE FROM STATION WHERE STATIONCODE = '{station_code}' AND DDATE = '{date}'"
+    query = f"SELECT WATERSTATE FROM STATION WHERE STATIONCODE = '{station_code}' AND DDATE = TO_DATE('{date}', 'dd/mm/yyyy')"
     cur.execute(query)
     result = cur.fetchone()
-    cur.close()
     if result:
-        daily_rainfall_total = result[0]
+        daily_rainfall_total = {"WATERSTATE":result[0]}
         return jsonify(daily_rainfall_total)
     else:
         return jsonify("No data found for the provided station code and date"), 404
 
-
+@app.route('/api/get_waterstates', methods=['POST'])
+def get_waterstates():
+    if not request.headers.has_key('kkey_y') or request.headers['kkey_y'] != api_key:
+        abort(404)
+    data = request.get_json()
+    station_code = data['STATIONCODE']
+    date_from = data['DDATE_FROM']
+    date_to = data['DDATE_TO']
+    query = f"SELECT WATERSTATE FROM STATION WHERE STATIONCODE = '{station_code}' AND DDATE BETWEEN TO_DATE('{date_from}', 'dd/mm/yyyy') and TO_DATE('{date_to}', 'dd/mm/yyyy')"
+    cur.execute(query)
+    res = cur.fetchall()
+    a = []
+    for r in res:
+        a.append(r[0])
+    if len(a) != 0:
+        return jsonify(a)
+    else:
+        return jsonify("No data found for the provided station code and date"), 404
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=int("5000"), debug=True)

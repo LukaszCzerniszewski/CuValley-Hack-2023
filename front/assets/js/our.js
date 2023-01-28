@@ -1,52 +1,87 @@
+var startDate = "30/09/2012";
+var endDate = "30/10/2012";
+
 if ($("#water-state")) {
-    var start = moment().subtract(1, "days");
-    var end = moment().subtract(1, "days");
-    var cb = function(start, end) {
-      $("#water-state .date-range-report span").html(
-        start.format("ll") + " - " + end.format("ll")
-      );
-    };
-
-  
-    $("#water-state .date-range-report").daterangepicker(
-      {
-        startDate: start,
-        endDate: end,
-        opens: 'left',
-        ranges: {
-          Today: [moment(), moment()],
-          Yesterday: [
-            moment().subtract(1, "days"),
-            moment().subtract(1, "days")
-          ],
-          "Last 7 Days": [moment().subtract(6, "days"), moment()],
-          "Last 30 Days": [moment().subtract(29, "days"), moment()],
-          "This Month": [moment().startOf("month"), moment().endOf("month")],
-          "Last Month": [
-            moment()
-              .subtract(1, "month")
-              .startOf("month"),
-            moment()
-              .subtract(1, "month")
-              .endOf("month")
-          ]
-        }
-      },
-      cb
+  var start = moment().subtract(1, "days");
+  var end = moment().subtract(1, "days");
+  var cb = function(start, end) {
+    startDate = new Date(start);
+    endDate = end;
+    $("#water-state .date-range-report span").html(
+      start.format("ll") + " - " + end.format("ll")
     );
-    cb(start, end);
+  };
+
+
+  $("#water-state .date-range-report").daterangepicker(
+    {
+      startDate: start,
+      endDate: end,
+      opens: 'left',
+      ranges: {
+        Today: [moment(), moment()],
+        Yesterday: [
+          moment().subtract(1, "days"),
+          moment().subtract(1, "days")
+        ],
+        "Last 7 Days": [moment().subtract(6, "days"), moment()],
+        "Last 30 Days": [moment().subtract(29, "days"), moment()],
+        "This Month": [moment().startOf("month"), moment().endOf("month")],
+        "Last Month": [
+          moment()
+            .subtract(1, "month")
+            .startOf("month"),
+          moment()
+            .subtract(1, "month")
+            .endOf("month")
+        ]
+      }
+    },
+    cb
+  );
+  cb(start, end);
+}
+
+var selected_STATIONCODE = "151160060";
+
+
+$("#dropdown").on('change', function() {
+  selected_STATIONCODE = this.value;
+  request_data();
+  config.data.datasets[0].data = res;
+  myLine = new Chart(ctx, config);
+  console.log($('.daterangepicker').first());
+  startDate = $('.daterangepicker').first().data('daterangepicker').startDate._d;
+  endDate = $('.daterangepicker').first().data('daterangepicker').endDate._d;
+  console.log(startDate, endData);
+});
+
+var res = [];
+
+function request_data() {
+  const xhttp = new XMLHttpRequest();
+  xhttp.onload = function() {
+    res = JSON.parse(this.responseText);
+    console.log(res);
   }
-
-
-
-
+  
+  xhttp.open("POST", "/api/get_waterstates", false);
+  xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+  xhttp.setRequestHeader("kkey_y", "c9f53a7a0657ed8769098ad48074709cbd0bf0ad83e41e67164a9316605b86b0bdd81f0b16fd8b1a4a3dc7c0194f9bcb50cc29c16bfd73ef42c07e81b35026ef");
+  xhttp.send(JSON.stringify({
+    "STATIONCODE": selected_STATIONCODE,
+    "DDATE_FROM": startDate,
+    "DDATE_TO": startDate
+  }));
+}
+request_data();
 
 /*======== 16. ANALYTICS - ACTIVITY CHART ========*/
 var activity = document.getElementById("activity");
 if (activity !== null) {
   var activityData = [
     {
-      first: result,
+      first: res,
       second: [600,600,600,600,600,600,600],
       third: [400,400,400,400,400,400,400,400],
       fourth: [333,333,333,333,333,333,333],
@@ -58,11 +93,11 @@ if (activity !== null) {
   //   let endDate = calendar.getEndDate();
   // });
   // let labels=[]
-  // for (let date = startDate; date <= endDate; date.setDate(date.getDate() + 1)) {
-  //   let label = getLabelForDate(date);
-  //   setLabelForDate(date, label);
-  //   labels.push(label);
-  // }
+  for (let date = startDate; date <= endDate; date.setDate(date.getDate() + 1)) {
+    let label = getLabelForDate(date);
+    setLabelForDate(date, label);
+    labels.push(label);
+  }
   // function callRainfall() {
   //   $.ajax({
   //     url:'/api/get-rainfall',
@@ -91,7 +126,7 @@ if (activity !== null) {
           label: "Trend",
           backgroundColor: "transparent",
           borderColor: "rgb(0,204,0)",
-          data: activityData[0].first,
+          data: res,
           lineTension: 0,
           pointRadius: 5,
           pointBackgroundColor: "rgba(255,255,255,1)",
