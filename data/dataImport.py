@@ -8,7 +8,7 @@ from datetime import datetime
 import re
 
 class FileWork():
-    hydroTestFile = 'hydro - sample.xlsx'
+    hydroTestFile = 'hydro+2021+2022.xlsx'
     metoTestFile = 'meteo - sample.xlsx'
     metoCsvFile = 'pobraneDane.csv'
     #  Wczytanie testowych danych Hydro przekazanych w excelu
@@ -92,14 +92,28 @@ class DataBaseWork():
 
     def pushHydroToBase(self, json):
         json = pandas.read_json(json, orient='records')
+        f = open("demofile2.txt", "a")
+
+
+
         for index, row in json.iterrows():
-            x = datetime.strptime(str(row.Data), '%d-%m-%Y')
+            #x = datetime.strptime(str(row.Data), '%d-%m-%Y')
+
+            x = pandas.to_datetime(row.Data, unit='ms')
+            print(x)
+
+            #x = datetime.fromtimestamp(int(row.Data))
             date = x.strftime("%y/%m/%d")
 
             query1 = "INSERT INTO station ( DDate, waterstate, stationcode ) VALUES ('" + str(date) + "'," + str(row[1]) + ",151160060);"
-            query2 = "INSERT INTO station ( DDate, waterstate, stationcode ) VALUES ('" + str(date) + "'," + str(row[2]) + ",150180060);"
-            self.cursor.execute(query1)
-            self.cursor.execute(query2)
+           # query2 = "INSERT INTO station ( DDate, waterstate, stationcode ) VALUES ('" + str(date) + "'," + str(row[2]) + ",150180060);"
+            f.write(query1)
+            f.write('\n')
+           # f.write(query2)
+           # f.write('\n')
+            # self.cursor.execute(query1)
+            # self.cursor.execute(query2)
+        f.close()
 
     def pushCsvMeteoFileToBase(self):
         file1 = open('meteo_fixed.csv', 'r', encoding="utf-8")
@@ -136,6 +150,7 @@ class DataBaseWork():
 
 fileWork = FileWork()
 db = DataBaseWork()
+db.pushHydroToBase(fileWork.loadHydroAsJson())
 #print(fileWork.loadHydroAsJson())
 #print(fileWork.extractFromJson(fileWork.loadDataFromPageCsv(),[250160410, '251170270', '250160610','250160030','250160070','250170050','251160230','251160170']))
 
