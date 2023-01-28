@@ -68,7 +68,7 @@ def get_rainfall():
     data = request.get_json()
     station_code = data['STATIONCODE']
     date = data['DDATE']
-    query = f"SELECT DAILYRAINFALLTOTAL FROM METEO_STATION WHERE STATIONCODE = '{station_code}' AND DDATE = '{date}'"
+    query = f"SELECT WATERSTATE FROM STATION WHERE STATIONCODE = '{station_code}' AND DDATE = '{date}'"
     cur.execute(query)
     result = cur.fetchone()
     cur.close()

@@ -59,6 +59,15 @@ if (activity !== null) {
   //   setLabelForDate(date, label);
   //   labels.push(label);
   // }
+  function callRainfall() {
+    $.ajax({
+      url:'/api/get-rainfall',
+      type: 'GET',
+      success: function(response) {
+        console.log(respone)
+      }
+    });
+  }
   var config = {
     // The type of chart we want to create
     type: "line",
@@ -138,12 +147,14 @@ if (activity !== null) {
           }
       ]
     },
+    
     // Configuration options go here
     options: {
       responsive: true,
       maintainAspectRatio: false,
       legend: {
-        display: false
+        display: true,
+        position: 'top'
       },
       scales: {
         xAxes: [
