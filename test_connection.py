@@ -11,7 +11,7 @@ print("Successfully connected to Oracle Database")
 
 cur = connection.cursor()
 
-# wyszukanie naszych tabel w bazie
+# # wyszukanie naszych tabel w bazie
 # cur.execute("SELECT owner, table_name FROM all_tables")
 # res = cur.fetchall()
 # a = dict()
@@ -21,8 +21,8 @@ cur = connection.cursor()
 # print(list(a.keys()))
 
 
-# ['METEO_STATION', 'WEATHER_PROGNOSE']
-cur.execute("SELECT * FROM METEO_STATION")
+['METEO_STATION', 'WEATHER_PROGNOSE', 'STATION']
+cur.execute("SELECT * FROM STATION")
 res = cur.fetchall()
 a = dict()
 for row in res:
