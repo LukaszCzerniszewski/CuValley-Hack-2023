@@ -1,14 +1,14 @@
-if ($("#user-activity")) {
+if ($("#water-state")) {
     var start = moment().subtract(1, "days");
     var end = moment().subtract(1, "days");
     var cb = function(start, end) {
-      $("#user-activity .date-range-report span").html(
+      $("#water-state .date-range-report span").html(
         start.format("ll") + " - " + end.format("ll")
       );
     };
 
   
-    $("#user-activity .date-range-report").daterangepicker(
+    $("#water-state .date-range-report").daterangepicker(
       {
         startDate: start,
         endDate: end,
@@ -189,7 +189,7 @@ if (activity !== null) {
   var ctx = document.getElementById("activity").getContext("2d");
   var myLine = new Chart(ctx, config);
 
-  var items = document.querySelectorAll("#user-activity .nav-tabs .nav-item");
+  var items = document.querySelectorAll("#water-state .nav-tabs .nav-item");
   items.forEach(function(item, index){
     item.addEventListener("click", function() {
       config.data.datasets[0].data = activityData[index].first;

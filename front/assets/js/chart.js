@@ -1600,7 +1600,7 @@ $(document).ready(function() {
             },
             label: function(tooltipItem, data) {
               return (
-                data["datasets"][0]["data"][tooltipItem["index"]] + " Sessions"
+                data["datasets"][0]["data"][tooltipItem["index"]] + " Kkoszka"
               );
             }
           },

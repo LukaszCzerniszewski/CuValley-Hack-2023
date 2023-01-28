@@ -1,10 +1,6 @@
 import getpass
 import oracledb
 
-#pw = getpass.getpass("Enter password: ")
-
-# dsn = """(description= (retry_count=20)(retry_delay=3)(address=(protocol=tcps)(port=1522)(host=adb.eu-frankfurt-1.oraclecloud.com))(connect_data=(service_name=g059678eb35cc6c_objectnotfound_high.adb.oraclecloud.com))(security=(ssl_server_dn_match=yes)))"""
-
 connection = oracledb.connect(
     user="admin",
     password='7KZYc!TrQQR*8onxTx4Z',
@@ -13,7 +9,27 @@ connection = oracledb.connect(
 
 print("Successfully connected to Oracle Database")
 
-cursor = connection.cursor()
-print(cursor)
+cur = connection.cursor()
+
+# wyszukanie naszych tabel w bazie
+# cur.execute("SELECT owner, table_name FROM all_tables")
+# res = cur.fetchall()
+# a = dict()
+# for row in res:
+#     if(str(row[0])=="ADMIN"):
+#         a[str(row[1])] = 0
+# print(list(a.keys()))
+
+
+# ['METEO_STATION', 'WEATHER_PROGNOSE']
+cur.execute("SELECT * FROM METEO_STATION")
+res = cur.fetchall()
+a = dict()
+for row in res:
+    print(str(row))
+
+
+cur.close()
+connection.close()
 
 
