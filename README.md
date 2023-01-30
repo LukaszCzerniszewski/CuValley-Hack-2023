@@ -3,6 +3,9 @@
 <ul>
   <h4>Cel</h4>
   Stworzenie modelu/algorytmu, który na bazie danych historycznych oraz prognozy pogody, pochodzących z IMGW, pozwoli prognozować poziom wody rzeki. 
+  <p><img src="https://user-images.githubusercontent.com/68614570/215609191-830e6a56-c5d1-45b8-b8ed-cb60758ad08c.gif"  width="800" /></p>
+  
+  
   <h4>Realizacja</h4>
   Ideą przyświiecającą zespołowi ObjectNotFound było wykorzystanie sieci neuronowych do przewidywania poziomu wody w rzece. Dane postanowiliśmy zapisywac w bazie danych Oracle, która jest bardzo wydajna. Wykorzystana architektura oraz wykonanie interfejsu graficznego w formie aplikacji internetowej sprawia, że system jest dostępny dla wszystkich osób w obrębie sieci oraz będzie działać na każdym urządzenie niezależnie od systemu operacyjnego czy typu. 
 </ul>  
